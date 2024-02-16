@@ -2,24 +2,24 @@ import { createCollection } from "@database/mongodb/create-collection";
 import { Register, Login } from "@src/types";
 
 export class AuthService {
-  static async register(user: Register) {
+  static async register(userData: Register) {
     const usersCollection = createCollection();
     try {
-      const registerUser = await usersCollection.insertOne({ user });
-      return registerUser;
+      const insertUser = await usersCollection.insertOne({ userData });
+      return insertUser;
     } catch (error) {
-      throw Error("Failed to register user", { cause: error });
+      throw new Error("Failed to register user", { cause: error });
     }
   }
 
-  static async login(user: Login) {
+  static async login(userData: Login) {
     const usersCollection = createCollection();
-    const { email } = user;
+    const { email } = userData;
     try {
-      const loginUser = await usersCollection.findOne({ email });
-      return loginUser;
+      const loggedInUser = await usersCollection.findOne({ email });
+      return loggedInUser;
     } catch (error) {
-      throw Error("Failed to login user", { cause: error });
+      throw new Error("Failed to login user", { cause: error });
     }
   }
 }
