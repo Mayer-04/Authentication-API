@@ -1,7 +1,7 @@
 import express from "express";
 import { corsAdapter, envs, morganAdapter } from "@config/index";
 import { router } from "@routes/routes";
-import { connectionToMongodb } from "./database/mongodb/connection";
+import { connectionToMongodb } from "@database/mongodb/connection";
 
 const app = express();
 const SERVER_PORT = envs.PORT ?? 5001;
@@ -9,7 +9,7 @@ const SERVER_PORT = envs.PORT ?? 5001;
 app.disable("x-powered-by");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(corsAdapter());
 app.use(morganAdapter("dev"));
 
