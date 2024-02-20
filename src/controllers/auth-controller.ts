@@ -14,11 +14,13 @@ export class AuthController {
     try {
       const user = await this.authMongoDB.register(body.data);
 
-      if (user) {
-        return response.status(400).json({ message: "User already exists" });
+      if (user === null) {
+        return response
+          .status(201)
+          .json({ message: "User created successfully" });
+      } else {
+        return response.status(409).json({ message: "Error creating user" });
       }
-
-      return response.status(201).json({ user });
     } catch (error) {
       return response
         .status(500)

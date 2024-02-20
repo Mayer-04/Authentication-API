@@ -20,8 +20,8 @@ export class AuthMongoDB {
     }
 
     try {
-      const newUser = await usersCollection.insertOne(userData);
-      return newUser;
+      await usersCollection.insertOne(userData);
+      return null;
     } catch (error) {
       throw new Error("Error creating user in document", {
         cause: error,
