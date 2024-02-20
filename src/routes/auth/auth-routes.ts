@@ -1,11 +1,11 @@
 import { Router } from "express";
+import { AuthController } from "@controllers/auth-controller";
+import { AuthMongoDB } from "@src/models/mongo";
 
 export const authRouter = Router();
 
-authRouter.post("/login", (req, res) => {
-  res.send("Soy el Login");
-});
+const authMongoDB = new AuthMongoDB();
+const authController = new AuthController(authMongoDB);
 
-authRouter.post("/register", (req, res) => {
-  res.send("Soy el Register");
-});
+authRouter.post("/login", authController.login);
+authRouter.post("/register", authController.register);

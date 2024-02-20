@@ -1,4 +1,4 @@
-import { client } from "@src/utils/mongo-client";
+import { client } from "@utils/index";
 import { User } from "@src/types";
 
 export const createCollection = () => {

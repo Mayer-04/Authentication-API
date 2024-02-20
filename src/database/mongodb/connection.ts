@@ -1,4 +1,4 @@
-import { client } from "@src/utils/mongo-client";
+import { client } from "@utils/index";
 
 export const connectionToMongodb = async () => {
   try {
