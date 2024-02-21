@@ -1,11 +1,11 @@
 import { createCollection } from "@database/mongodb/create-collection";
-import { Register, Login } from "@src/types";
+import { Register, Login, LoginResult } from "@src/types";
 import { BcryptAdapter } from "@src/config";
 
 export class AuthMongoDB {
   async register(userData: Register) {
     const usersCollection = createCollection();
-    const { username, email, password, confirmPassword } = userData;
+    const { username, email, password } = userData;
 
     try {
       const existingUser = await usersCollection.findOne({
@@ -20,16 +20,12 @@ export class AuthMongoDB {
     }
 
     const hashedPassword = await BcryptAdapter.hashPassword(password);
-    const hashedPasswordConfirmation = await BcryptAdapter.hashPassword(
-      confirmPassword
-    );
 
     try {
       await usersCollection.insertOne({
         username,
         email,
         password: hashedPassword,
-        confirmPassword: hashedPasswordConfirmation,
       });
     } catch (error) {
       throw new Error("Error creating user in document", {
@@ -38,14 +34,14 @@ export class AuthMongoDB {
     }
   }
 
-  async login(userData: Login) {
+  async login(userData: Login): Promise<LoginResult> {
     const usersCollection = createCollection();
     const { email, password } = userData;
     try {
       const loggedInUser = await usersCollection.findOne({ email });
 
       if (!loggedInUser) {
-        return loggedInUser;
+        return { user: null, passwordMatch: false };
       }
 
       const passwordMatches = await BcryptAdapter.comparePassword(
@@ -53,11 +49,7 @@ export class AuthMongoDB {
         loggedInUser.password
       );
 
-      if (!passwordMatches) {
-        return passwordMatches;
-      }
-
-      return loggedInUser;
+      return { user: loggedInUser, passwordMatch: passwordMatches };
     } catch (error) {
       throw new Error("Credentials are not valid", { cause: error });
     }
