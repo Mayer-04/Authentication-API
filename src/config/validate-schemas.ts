@@ -1,5 +1,5 @@
 import { Register, Login } from "@src/types";
-import { registerSchema, loginSchema } from "@utils/index";
+import { registerSchema, loginSchema } from "@config/index";
 
 export const validateRegister = (body: Register) => {
   return registerSchema.safeParse(body);
