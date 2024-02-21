@@ -5,11 +5,11 @@ export const registerSchema = z
     username: z.string().min(4),
     email: z.string().email(),
     password: z.string().min(6),
-    passwordConfirmation: z.string().min(6),
+    confirmPassword: z.string().min(6),
   })
-  .refine((data) => data.password === data.passwordConfirmation, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-    path: ["passwordConfirmation"],
+    path: ["confirmPassword"],
   });
 
 export const loginSchema = z.object({
