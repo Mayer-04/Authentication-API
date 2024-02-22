@@ -1,4 +1,4 @@
-# API REST de Autenticación
+# API REST de Autenticación 🔒
 
 Este proyecto es una API REST desarrollada en TypeScript con Express y MongoDB para la gestión de autenticación de usuarios. Proporciona funcionalidades de registro (register) y inicio de sesión (login), utilizando tecnologías y prácticas modernas para garantizar la seguridad y la eficiencia del sistema.
 
