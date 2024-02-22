@@ -23,7 +23,7 @@ Este proyecto es una API REST desarrollada en TypeScript con Express y MongoDB p
 1. Clonar el repositorio:
 
    ```bash
-   git clone https://github.com/Mayer-04/Fastify-API.git
+   git clone https://github.com/Mayer-04/Authentication-API.git
    ```
 
 2. Instalar las dependencias:
