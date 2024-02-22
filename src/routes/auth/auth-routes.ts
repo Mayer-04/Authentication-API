@@ -7,5 +7,5 @@ export const authRouter = Router();
 const authMongoDB = new AuthMongoDB();
 const authController = new AuthController(authMongoDB);
 
-authRouter.post("/login", authController.login);
 authRouter.post("/register", authController.register);
+authRouter.post("/login", authController.login);

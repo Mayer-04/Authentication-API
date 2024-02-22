@@ -1,6 +1,7 @@
 import express from "express";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
-import { corsAdapter, envs, morganAdapter } from "@config/index";
+import { envs, corsAdapter, morganAdapter } from "@config/index";
 import { router } from "@routes/routes";
 import { connectionToMongodb } from "@database/mongodb/connection";
 
@@ -12,6 +13,7 @@ app.disable("x-powered-by");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(corsAdapter());
+app.use(helmet());
 app.use(cookieParser());
 app.use(morganAdapter("dev"));
 

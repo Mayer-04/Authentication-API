@@ -1,14 +1,16 @@
 import { ObjectId } from "mongodb";
 
-export interface LoginResult {
+interface LoginResult {
   user: User | null;
   passwordMatch: boolean;
 }
 
-export interface User {
+interface User {
   _id?: ObjectId;
   username: string;
   email: string;
   password: string;
   confirmPassword?: string;
 }
+
+export { LoginResult, User };
