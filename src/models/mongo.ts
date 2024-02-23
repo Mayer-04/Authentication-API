@@ -21,12 +21,14 @@ export class AuthMongoDB {
 
     const hashedPassword = await BcryptAdapter.hashPassword(password);
 
+    const user = {
+      username: username,
+      email: email,
+      password: hashedPassword,
+    };
+
     try {
-      await usersCollection.insertOne({
-        username,
-        email,
-        password: hashedPassword,
-      });
+      await usersCollection.insertOne(user);
     } catch (error) {
       throw new Error("Error creating user in document", {
         cause: error,

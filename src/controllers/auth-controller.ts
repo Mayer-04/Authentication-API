@@ -39,7 +39,9 @@ export class AuthController {
     const body = validateLogin(request.body);
 
     if (!body.success) {
-      return response.status(400).json({ message: body.error });
+      return response
+        .status(400)
+        .json({ message: body.error.issues[0].message });
     }
 
     try {
@@ -60,10 +62,12 @@ export class AuthController {
         return response.status(500).json({ message: "User id not found" });
       }
 
-      const token = Jwt.generateToken({
+      const tokenPayload = {
         _id: userId,
         username: loginResult.user.username,
-      });
+      };
+
+      const token = Jwt.generateToken(tokenPayload);
 
       response.cookie("token", token, { httpOnly: true });
 
