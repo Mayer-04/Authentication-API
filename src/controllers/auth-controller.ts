@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AuthMongoDB } from "@src/models/mongo";
 import { validateRegister, validateLogin } from "@config/index";
 import { Jwt } from "@config/index";
+
 export class AuthController {
   constructor(private authMongoDB: AuthMongoDB) {}
 

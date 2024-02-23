@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Jwt } from "@config/index";
 
 type Token = string;
+
 export const verifyToken = (
   request: Request,
   response: Response,
