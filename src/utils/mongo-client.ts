@@ -7,4 +7,5 @@ export const client = new MongoClient(envs.MONGO_URI, {
     strict: true,
     deprecationErrors: true,
   },
+  serverMonitoringMode: "stream",
 });
