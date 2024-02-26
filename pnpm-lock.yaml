@@ -53,8 +53,8 @@ devDependencies:
     specifier: 4.17.21
     version: 4.17.21
   '@types/jsonwebtoken':
-    specifier: 9.0.5
-    version: 9.0.5
+    specifier: 9.0.6
+    version: 9.0.6
   '@types/morgan':
     specifier: 1.9.9
     version: 1.9.9
@@ -62,8 +62,8 @@ devDependencies:
     specifier: 20.11.20
     version: 20.11.20
   '@types/pg':
-    specifier: 8.11.0
-    version: 8.11.0
+    specifier: 8.11.2
+    version: 8.11.2
   morgan:
     specifier: 1.10.0
     version: 1.10.0
@@ -360,8 +360,8 @@ packages:
     resolution: {integrity: sha512-D0CFMMtydbJAegzOyHjtiKPLlvnm3iTZyZRSZoLq2mRhDdmLfIWOCYPfQJ4cu2erKghU++QvjcUjp/5h7hESpA==}
     dev: true
 
-  /@types/jsonwebtoken@9.0.5:
-    resolution: {integrity: sha512-VRLSGzik+Unrup6BsouBeHsf4d1hOEgYWTm/7Nmw1sXoN1+tRly/Gy/po3yeahnP4jfnQWWAhQAqcNfH7ngOkA==}
+  /@types/jsonwebtoken@9.0.6:
+    resolution: {integrity: sha512-/5hndP5dCjloafCXns6SZyESp3Ldq7YjH3zwzwczYnjxIT0Fqzk5ROSYVGfFyczIue7IUEj8hkvLbPoLQ18vQw==}
     dependencies:
       '@types/node': 20.11.20
     dev: true
@@ -386,8 +386,8 @@ packages:
       undici-types: 5.26.5
     dev: true
 
-  /@types/pg@8.11.0:
-    resolution: {integrity: sha512-sDAlRiBNthGjNFfvt0k6mtotoVYVQ63pA8R4EMWka7crawSR60waVYR0HAgmPRs/e2YaeJTD/43OoZ3PFw80pw==}
+  /@types/pg@8.11.2:
+    resolution: {integrity: sha512-G2Mjygf2jFMU/9hCaTYxJrwdObdcnuQde1gndooZSOHsNSaCehAuwc7EIuSA34Do8Jx2yZ19KtvW8P0j4EuUXw==}
     dependencies:
       '@types/node': 20.11.20
       pg-protocol: 1.6.0
