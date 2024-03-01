@@ -17,6 +17,7 @@ export class Jwt {
       const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
       return decoded;
     } catch (error) {
+      console.error(error);
       return null;
     }
   }

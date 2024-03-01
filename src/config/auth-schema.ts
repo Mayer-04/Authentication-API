@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+const message = "Passwords do not match";
+const path = ["confirmPassword"];
+
 export const registerSchema = z
   .object({
     username: z.string().min(4),
@@ -8,8 +11,8 @@ export const registerSchema = z
     confirmPassword: z.string().min(6),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
+    message,
+    path,
   });
 
 export const loginSchema = z.object({
