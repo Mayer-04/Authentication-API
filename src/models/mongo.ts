@@ -1,6 +1,6 @@
 import { createCollection } from "@database/mongodb/create-collection";
-import { Register, Login, LoginResult } from "@src/types";
-import { BcryptAdapter } from "@src/config";
+import { comparePassword, hashPassword } from "@src/config";
+import type { Login, LoginResult, Register } from "@src/types";
 
 export class AuthMongoDB {
   async register(userData: Register) {
@@ -19,7 +19,7 @@ export class AuthMongoDB {
       throw new Error("Error finding user in document", { cause: error });
     }
 
-    const hashedPassword = await BcryptAdapter.hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
     const user = {
       username: username,
@@ -46,9 +46,9 @@ export class AuthMongoDB {
         return { user: null, passwordMatch: false };
       }
 
-      const passwordMatches = await BcryptAdapter.comparePassword(
+      const passwordMatches = await comparePassword(
         password,
-        loggedInUser.password
+        loggedInUser.password,
       );
 
       return { user: loggedInUser, passwordMatch: passwordMatches };

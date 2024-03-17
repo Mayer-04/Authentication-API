@@ -1,7 +1,6 @@
-import { Request, Response } from "express";
-import { AuthMongoDB } from "@src/models/mongo";
-import { validateRegister, validateLogin } from "@config/index";
-import { Jwt } from "@config/index";
+import { generateToken, validateLogin, validateRegister } from "@config/index";
+import type { AuthMongoDB } from "@src/models/mongo";
+import type { Request, Response } from "express";
 
 export class AuthController {
   constructor(private authMongoDB: AuthMongoDB) {}
@@ -67,7 +66,7 @@ export class AuthController {
         username: loginResult.user.username,
       };
 
-      const token = Jwt.generateToken(tokenPayload);
+      const token = generateToken(tokenPayload);
 
       response.cookie("token", token, { httpOnly: true });
 

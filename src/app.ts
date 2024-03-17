@@ -1,9 +1,9 @@
+import { corsAdapter, envs, morganAdapter } from "@config/index";
+import { connectionToMongodb } from "@database/mongodb/connection";
+import { router } from "@routes/routes";
+import cookieParser from "cookie-parser";
 import express from "express";
 import helmet from "helmet";
-import cookieParser from "cookie-parser";
-import { envs, corsAdapter, morganAdapter } from "@config/index";
-import { router } from "@routes/routes";
-import { connectionToMongodb } from "@database/mongodb/connection";
 
 const app = express();
 const SERVER_PORT = envs.PORT ?? 5001;

@@ -1,7 +1,7 @@
-import { Router } from "express";
 import { AuthController } from "@controllers/auth-controller";
-import { AuthMongoDB } from "@src/models/mongo";
 import { rateLimitMiddleware } from "@src/middlewares/rate-limiter";
+import { AuthMongoDB } from "@src/models/mongo";
+import { Router } from "express";
 
 export const authRouter = Router();
 

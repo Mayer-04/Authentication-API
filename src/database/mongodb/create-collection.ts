@@ -1,5 +1,5 @@
+import type { User } from "@src/types";
 import { client } from "@utils/index";
-import { User } from "@src/types";
 
 export const createCollection = () => {
   const db = client.db("authentication");

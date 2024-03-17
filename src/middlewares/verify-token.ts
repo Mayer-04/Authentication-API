@@ -1,20 +1,21 @@
-import { Request, Response, NextFunction } from "express";
-import { Jwt } from "@config/index";
+import { validateToken } from "@config/index";
+import type { NextFunction, Request, Response } from "express";
 
 type Token = string;
 
 export const verifyToken = (
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
-    const token: Token = request.cookies["token"];
+    // const token: Token = request.cookies["token"];
+    const token: Token = request.cookies.token;
     if (!token) {
       return response.status(401).json({ message: "No token provided" });
     }
 
-    const validPayload = Jwt.validateToken(token);
+    const validPayload = validateToken(token);
 
     if (!validPayload) {
       return response.status(403).json({ message: "Invalid token" });

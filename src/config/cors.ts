@@ -1,5 +1,5 @@
-import cors, { CorsOptions } from "cors";
 import { ACCEPTED_ORIGINS } from "@utils/index";
+import cors, { type CorsOptions } from "cors";
 
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {

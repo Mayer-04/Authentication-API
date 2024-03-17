@@ -1,5 +1,5 @@
-import { Register, Login } from "@src/types";
-import { registerSchema, loginSchema } from "@config/index";
+import { loginSchema, registerSchema } from "@config/index";
+import type { Login, Register } from "@src/types";
 
 export const validateRegister = (body: Register) => {
   return registerSchema.safeParse(body);
