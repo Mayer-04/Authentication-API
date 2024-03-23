@@ -1,10 +1,5 @@
 import type { ObjectId } from "mongodb";
 
-export interface LoginResult {
-  user: UserCollection | null;
-  passwordMatch: boolean;
-}
-
 export interface UserCollection {
   _id?: ObjectId;
   username: string;
@@ -12,3 +7,9 @@ export interface UserCollection {
   password: string;
   confirmPassword?: string;
 }
+export interface LoginResult {
+  user: UserCollection | null;
+  passwordMatch: boolean;
+}
+
+export type User = Omit<UserCollection, "_id">;

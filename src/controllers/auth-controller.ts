@@ -21,10 +21,10 @@ export class AuthController {
       if (user) {
         return response
           .status(409)
-          .json({ message: "Error creating user - User already exists" });
+          .json({ success: false, message: "Error creating user" });
       }
       return response.status(201).json({
-        message: "User created successfully",
+        success: true,
         user: { username, email },
       });
     } catch (error) {
@@ -58,7 +58,7 @@ export class AuthController {
       const userId = loginResult.user._id;
 
       if (!userId) {
-        return response.status(500).json({ message: "User id not found" });
+        return response.status(404).json({ message: "User id not found" });
       }
 
       const tokenPayload = {
@@ -71,7 +71,7 @@ export class AuthController {
       response.cookie("token", token, { httpOnly: true });
 
       return response.status(200).json({
-        message: "Login successful",
+        success: true,
         token,
       });
     } catch (error) {

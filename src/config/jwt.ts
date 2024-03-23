@@ -2,6 +2,7 @@ import { envs } from "@config/index";
 import type { TokenPayload } from "@src/types/index";
 import { TOKEN_EXPIRATION } from "@utils/index";
 import jwt from "jsonwebtoken";
+
 const { JWT_SECRET } = envs;
 
 export const generateToken = ({ _id, username }: TokenPayload): string => {

@@ -12,8 +12,11 @@ export const rateLimitMiddleware = async (
   try {
     const { ip } = request;
 
-    const userIdentifier = `${ip}`;
-    const remainingPoints = await rateLimiter.consume(userIdentifier);
+    if (!ip) {
+      return response.status(404).json("IP not found");
+    }
+
+    const remainingPoints = await rateLimiter.consume(ip);
 
     response.set({
       "X-RateLimit-Limit": rateLimiterOptions.points,
