@@ -13,7 +13,7 @@ export const rateLimitMiddleware = async (
     const { ip } = request;
 
     if (!ip) {
-      return response.status(404).json("IP not found");
+      throw new Error("IP not found");
     }
 
     const remainingPoints = await rateLimiter.consume(ip);

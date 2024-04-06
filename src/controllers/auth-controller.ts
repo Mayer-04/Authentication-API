@@ -1,5 +1,6 @@
 import { generateToken, validateLogin, validateRegister } from "@config/index";
 import type { AuthMongoDB } from "@src/models/mongo";
+import { cookieOptions } from "@src/utils";
 import type { Request, Response } from "express";
 
 export class AuthController {
@@ -68,7 +69,7 @@ export class AuthController {
 
       const token = generateToken(tokenPayload);
 
-      response.cookie("token", token, { httpOnly: true });
+      response.cookie("token", token, cookieOptions);
 
       return response.status(200).json({
         success: true,
