@@ -15,7 +15,7 @@ Este proyecto es una API REST desarrollada en TypeScript con Express y MongoDB p
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/en) (v16.0.0 o superior)
+- [Node.js](https://nodejs.org/en) (v18.0.0 o superior)
 - [pnpm](https://pnpm.io/es/) (Puedes instalarlo globalmente con `npm install -g pnpm` o habilitando Corepack con `corepack enable pnpm` desde la v16.13 de Node.js)
 
 ## Instalación y Uso
