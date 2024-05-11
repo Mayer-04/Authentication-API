@@ -10,9 +10,14 @@ export class AuthController {
     const body = validateRegister(request.body);
 
     if (!body.success) {
-      return response
-        .status(400)
-        .json({ message: body.error.issues[0].message });
+      const { errors } = body.error;
+      const mapError = errors
+        .map((message) => {
+          return `Error in ${message.path[0]}: ${message.message}`;
+        })
+        .join("");
+
+      return response.status(400).json({ message: mapError });
     }
     try {
       const { data } = body;
@@ -39,9 +44,14 @@ export class AuthController {
     const body = validateLogin(request.body);
 
     if (!body.success) {
-      return response
-        .status(400)
-        .json({ message: body.error.issues[0].message });
+      const { errors } = body.error;
+      const mapError = errors
+        .map((message) => {
+          return `Error in ${message.path[0]}: ${message.message}`;
+        })
+        .join("");
+
+      return response.status(400).json({ message: mapError });
     }
 
     try {

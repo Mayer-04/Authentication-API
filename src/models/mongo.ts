@@ -3,20 +3,24 @@ import { comparePassword, hashPassword } from "@src/config";
 import type { Login, LoginResult, Register } from "@src/types";
 
 export class AuthMongoDB {
+  private usersCollection = createCollection();
+
+  async getUserByEmail(email: string) {
+    try {
+      const user = await this.usersCollection.findOne({ email });
+      return user;
+    } catch (error) {
+      throw new Error("Error finding user by email", { cause: error });
+    }
+  }
+
   async register(userData: Register) {
-    const usersCollection = createCollection();
     const { username, email, password } = userData;
 
-    try {
-      const existingUser = await usersCollection.findOne({
-        email: { $eq: email },
-      });
+    const existingUser = await this.getUserByEmail(email);
 
-      if (existingUser) {
-        return existingUser;
-      }
-    } catch (error) {
-      throw new Error("Error finding user in document", { cause: error });
+    if (existingUser) {
+      return existingUser;
     }
 
     const hashedPassword = await hashPassword(password);
@@ -28,7 +32,7 @@ export class AuthMongoDB {
     };
 
     try {
-      await usersCollection.insertOne(user);
+      await this.usersCollection.insertOne(user);
     } catch (error) {
       throw new Error("Error creating user in document", {
         cause: error,
@@ -37,23 +41,19 @@ export class AuthMongoDB {
   }
 
   async login(userData: Login): Promise<LoginResult> {
-    const usersCollection = createCollection();
     const { email, password } = userData;
-    try {
-      const loggedInUser = await usersCollection.findOne({ email });
 
-      if (!loggedInUser) {
-        return { user: null, passwordMatch: false };
-      }
+    const loggedInUser = await this.getUserByEmail(email);
 
-      const passwordMatches = await comparePassword(
-        password,
-        loggedInUser.password,
-      );
-
-      return { user: loggedInUser, passwordMatch: passwordMatches };
-    } catch (error) {
-      throw new Error("Credentials are not valid", { cause: error });
+    if (!loggedInUser) {
+      return { user: null, passwordMatch: false };
     }
+
+    const passwordMatches = await comparePassword(
+      password,
+      loggedInUser.password,
+    );
+
+    return { user: loggedInUser, passwordMatch: passwordMatches };
   }
 }
