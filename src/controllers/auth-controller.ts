@@ -13,7 +13,7 @@ export class AuthController {
       const { errors } = body.error;
       const mapError = errors
         .map((message) => {
-          return `Error in ${message.path[0]}: ${message.message}`;
+          return `Error in ${message.path.at(0)}: ${message.message}`;
         })
         .join("");
 
@@ -47,7 +47,7 @@ export class AuthController {
       const { errors } = body.error;
       const mapError = errors
         .map((message) => {
-          return `Error in ${message.path[0]}: ${message.message}`;
+          return `Error in ${message.path.at(0)}: ${message.message}`;
         })
         .join("");
 
